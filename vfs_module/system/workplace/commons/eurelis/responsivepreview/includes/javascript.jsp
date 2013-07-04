@@ -43,10 +43,14 @@
     if (actionParam == null || !actionParam.equals("iframe")) {
       String resourceName =  CmsEncoder.decode(jsp.getRequest().getParameter(CmsDialog.PARAM_RESOURCE));
       onlineLink = OpenCms.getLinkManager().getServerLink(cmsObject, resourceName);
+      pageContext.setAttribute("iframeMode", Boolean.FALSE);
     }
     else {
       iframeMode = true;
+      pageContext.setAttribute("iframeMode", Boolean.TRUE);
     }
+    
+   
     
     
     DeviceListReader dlr = new DeviceListReader(jsp);
@@ -54,6 +58,8 @@
   
 %>
 <script>
+
+
 var url = getURLParameter('url');
 var orientation = getURLParameter('orientation');
 var device = getURLParameter('device'); 
@@ -102,6 +108,7 @@ function submit() {
       
   });
   
+  var url = $('#url').val();
   
   //var device = params['device'];
   var orientation = 'portrait';
@@ -110,8 +117,7 @@ function submit() {
   	openWindow(ios[device][orientation]['width'], ios[device][orientation]['height'], location.pathname+'?url='+url+'&device='+device+'&orientation='+orientation);
   });
   
-  
-  return <c:out value="${!param.iframeMode}"/>;
+  return <c:out value="${!iframeMode}"/>;
 }
 function rotate() {
   var next = ios[device][orientation]['next-class'];
@@ -119,7 +125,9 @@ function rotate() {
   window.close();
 }
 $(document).ready(function(){
-  if(url != 'null') {
+	var actionIframe = ${(param.action == 'iframe')?'true':'false'};
+  if(url != 'null' && url != null && !actionIframe) {
+	 
     if(!orientation) orientation = "portrait";
     if(!device) device = "iphone";
     $('#rotate').click(rotate);

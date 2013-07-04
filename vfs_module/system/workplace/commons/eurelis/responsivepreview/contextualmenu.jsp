@@ -43,9 +43,11 @@
  		if (actionParam == null || !actionParam.equals("iframe")) {
  			String resourceName =  CmsEncoder.decode(jsp.getRequest().getParameter(CmsDialog.PARAM_RESOURCE));
  			onlineLink = OpenCms.getLinkManager().getServerLink(cmsObject, resourceName);
+ 			pageContext.setAttribute("iframeMode", Boolean.FALSE);
  		}
  		else {
  			iframeMode = true;
+ 			pageContext.setAttribute("iframeMode", Boolean.TRUE);
  		}
  		
  		
@@ -116,13 +118,14 @@
     							<div id="ios">
       								<a id="rotate" href="javascript:void(0)"><img/></a>
       								<iframe></iframe>
+      								<div id="iphone_alert" class="iphone_alert">
                         <div class="alert">
                             <div class="text"><%= Messages.getLbl(Messages.GUI_RESPONSIVEPREVIEW_JSP_IPHONEALERT_TEXT_0, locale) %></div>
                             <div class="button f_left" onclick="$('#iphone_alert').hide()"><%= Messages.getLbl(Messages.GUI_RESPONSIVEPREVIEW_JSP_CANCEL_0, locale) %></div>
                             <a class="button f_right light" onclick="$('#iphone_alert').hide()"><%= Messages.getLbl(Messages.GUI_RESPONSIVEPREVIEW_JSP_OK_0, locale) %></a>
                             <br class="clear" />
                         </div>
-                      </div>
+                      </div></div>
       								</div>
     							</div>
 								

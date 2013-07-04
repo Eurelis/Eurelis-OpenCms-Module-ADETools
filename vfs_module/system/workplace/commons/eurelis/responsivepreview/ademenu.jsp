@@ -28,6 +28,8 @@
     String actionParam = request.getParameter("action");
     boolean iframeMode = false;
     
+    
+    
 	if (actionParam != null && actionParam.equals("submit")) {
 		jsp.include(CmsWorkplace.FILE_EXPLORER_FILELIST, null, new HashMap());	
 	
@@ -43,15 +45,19 @@
  		if (actionParam == null || !actionParam.equals("iframe")) {
  			String resourceName =  CmsEncoder.decode(jsp.getRequest().getParameter(CmsDialog.PARAM_RESOURCE));
  			onlineLink = OpenCms.getLinkManager().getServerLink(cmsObject, resourceName);
+ 			pageContext.setAttribute("iframeMode", Boolean.FALSE);
  		}
  		else {
  			iframeMode = true;
+ 			pageContext.setAttribute("iframeMode", Boolean.TRUE);
  		}
  		
  		
 		DeviceListReader dlr = new DeviceListReader(jsp);
 		dlr.processRequest(request);
 	
+		
+		
 %>
 
 <!doctype html>
