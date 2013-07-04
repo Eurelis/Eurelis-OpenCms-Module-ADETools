@@ -1,0 +1,203 @@
+<project name="com.eurelis.opencms.ade.tools" default="module" basedir=".">
+  
+	<!-- // VARIABLES A MODIFIER // -->
+  <property name="environment" value="PUBLIC" />
+  <property name="build.major" value="1" /> <!-- Main technological changes (Galaxy release, ie : 2012 : v1)  / Should never change -->
+  <property name="build.minor" value="0" /> <!-- Main functional release stream : 0 for dev / Should be increment for new functionnalities after v1, Should be increment ob sprint basis during dev -->
+  <property name="build.bugfix" value="0" /> <!-- Minor functional release ou bug fix/ Should be increment ob sprint basis during dev -->
+  <property name="build.indice" value="0" /> <!-- Dev increment, should be 0 for qualification and production release -->
+  
+	<!-- important -->
+	<property name="project.name" value="Eurelis OpenCms Responsive And Stats" />
+	<property name="module.module.name" value="com.eurelis.opencms.ade.tools" />
+	<property name="module.module.version" value="${build.major}.${build.minor}.${build.bugfix}.${build.indice}" />
+	<property name="folder.package" value="com/eurelis/opencms/ade/tools" />
+	<property name="jar.version" value="${build.major}.${build.minor}.${build.bugfix}.${build.indice}" />
+	<property name="jdk.version" value="1.6" />
+	<property name="flag.uuids" value="true" />
+  
+	<!-- module -->
+	<property name="module.info.opencmsversion" value="8.5.1" />
+	<property name="module.info.exportversion" value="7" />
+	<property name="module.module.moduleclass" value="" />
+
+	<!-- // CONSTANTES // -->
+
+	<!-- ressources compilation -->
+	<property name="file.resourcetypes" value="etc/resourcetypes.xml" />
+	<property name="file.explorertypes" value="etc/explorertypes.xml" />
+	<property name="folder.build" value="build" />
+	<property name="folder.build.jar" value="build/jar" />
+	<property name="folder.build.jar.classes" value="build/jar/classes" />
+	<property name="folder.build.module" value="build/module" />
+	<property name="folder.etc" value="etc" />
+	<property name="folder.module" value="vfs_module" />
+	<property name="folder.complib" value="etc/complib" />
+	<property name="folder.src" value="src" />
+	<!-- module -->
+	<property name="module.info.creator" value="Admin" />
+	<property name="module.info.project" value="Offline" />
+	<property name="module.module.group" value="Eurelis products" />
+	<property name="module.module.authorname" value="Eurelis" />
+	<property name="module.module.authoremail" value="contact@eurelis.com" />
+	<property name="module.module.userinstalled" value="" />
+	<property name="module.module.dateinstalled" value="" />
+	<property name="modulepath.zip" value="${folder.build}/${module.module.name}" />
+	<property name="modulepath.zip.ext" value="zip" />
+	<property name="modulename.zip" value="${module.module.name}_${module.module.version}.zip" />
+	<property name="module.module.nicename" value="Eurelis - ${project.name} core features - Version ${module.module.version}" />
+	<property name="module.module.moduledescription" value="Eurelis OpenCms Module for ${project.name} core features.
+		               ////
+		               OpenCms - 	Eurelis - EUR-FRAMEWORK : Module Common Portlets
+		               Copyright (C) Eurelis - http://www.eurelis.com
+		               .
+		               This program is free software: you can redistribute it and/or modify
+		               it under the terms version 3 of the GNU Lesser General Public License as
+		               published by the Free Software Foundation.
+		               .
+		               This program is distributed in the hope that it will be useful,
+		               but WITHOUT ANY WARRANTY; without even the implied warranty of
+		               MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		               version 3 of the GNU Lesser General Public License for more details.
+		               .
+		               You should have received a copy of the GNU Lesser General Public License
+		               along with this program.  If not, see http://www.gnu.org/licenses/." />
+	<!-- jar -->
+	<property name="folder.opencms.lib" value="${folder.module}/system/modules/${module.module.name}/build/java" />
+	<property name="jar.name" value="${module.module.name}" />
+	<property name="jar.file" value="${jar.name}_${jar.version}.jar" />
+	<property name="classpath" value="${folder.bin}" />
+  <!-- css -->
+  <property name="css.path.from" value="${folder.module}/system/modules/${module.module.name}/resources/css" />
+  <property name="css.path.to" value="build/css" />
+  <!--property name="tools.yuicompressor" value="./etc/complib/yuicompressor-2.4.7.jar"/-->
+
+  <path id="compil.classpath">
+	    <fileset dir="${folder.complib}" includes="*.jar" />
+  </path>
+	
+	<!-- // TACHES ANT // -->
+  
+	<taskdef name="manifest" classname="com.eurelis.opencms.ant.task.ManifestBuilderTask">
+		<classpath>
+			<fileset dir="${folder.complib}" includes="*.jar" />
+		</classpath>
+	</taskdef>
+
+	<!-- CREATION DE L ARBORESCENCE DU PROJET -->
+	<target name="init-project" description="Initialiser l'arborescence du projet">
+		<mkdir dir="${folder.etc}" />
+		<mkdir dir="${folder.complib}" />
+    <mkdir dir="${folder.src}/${folder.package}" />
+		<mkdir dir="${folder.module}" />
+		<mkdir dir="${folder.module}/system/modules/${module.module.name}/classes/${folder.package}" />
+	</target>
+
+	<target name="init" description="Initialiser les dossiers de build">
+    <mkdir dir="${folder.build}" />
+    <mkdir dir="${folder.build.jar}" />
+    <mkdir dir="${folder.build.jar.classes}" />
+    <mkdir dir="${folder.build.module}" />
+	</target>
+
+	<target name="clean">
+		<delete dir="${folder.build}" />
+	</target>
+	
+	
+	<!-- COMPILATION DES CLASSES -->
+  <target name="compile" depends="init" description="Compilation des classes.">
+    <javac srcdir="${folder.src}" destdir="${folder.build.jar.classes}" classpathref="compil.classpath" debug="off" source="${jdk.version}" target="${jdk.version}" />
+    <jar jarfile="${folder.build.jar}/${jar.file}">
+      <fileset dir="${folder.build.jar.classes}"/>
+      <fileset dir="${folder.etc}/license" />
+      <manifest>
+        <attribute name="Built-By" value="${module.module.authorname}" />
+        <attribute name="Build-Jdk" value="${jdk.version}" />
+        <attribute name="Jar-version" value="${jar.version}" />
+      </manifest>
+    </jar>
+  </target>
+	
+  <target name="jar" depends="compile" description="Creation du jar dans le repertoire d'archives.">
+		<javac srcdir="${folder.src}" destdir="${folder.build.jar.classes}" classpathref="compil.classpath" debug="off" source="${jdk.version}" target="${jdk.version}" />
+		<jar jarfile="${folder.build.jar}/${jar.file}" >
+      <fileset dir="${folder.build.jar.classes}"/>
+      <fileset dir="${folder.etc}/license" />
+      <manifest>
+        <attribute name="Built-By" value="${module.module.authorname}" />
+        <attribute name="Build-Jdk" value="${jdk.version}" />
+        <attribute name="Jar-version" value="${jar.version}" />
+      </manifest>
+		</jar>
+	</target>
+
+	<!-- DISTRIBUTION DU MODULE -->
+  <target name="dist" depends="jar" description="Distribution des ressources uniquement." unless="jarexists">
+    <delete dir="${folder.build.module}/system/modules/${module.module.name}/lib"/>
+    <mkdir dir="${folder.build.module}/system/modules/${module.module.name}/lib"/>
+    <copy file="${folder.build.jar}/${jar.file}" todir="${folder.build.module}/system/modules/${module.module.name}/lib" />
+  	<!--
+  	<copy file="${folder.src}/${folder.package}/messages.properties" todir="${folder.build.module}/system/modules/${module.module.name}/classes/${folder.package}" />
+  	-->
+  	
+  	<copy file="${folder.src}/${folder.package}/responsivepreview/messages.properties" todir="${folder.build.module}/system/modules/${module.module.name}/classes/${folder.package}/responsivepreview/" />
+  	<copy file="${folder.src}/${folder.package}/responsivepreview/messages_fr.properties" todir="${folder.build.module}/system/modules/${module.module.name}/classes/${folder.package}/responsivepreview/" />
+  	  	  	
+  	
+  	<!-- UNCOMMENT TO MINIFY -->
+  	<!--antcall target="optimize-css"/-->
+    <copy todir="${folder.build.module}">
+      <fileset dir="${folder.module}" excludes="**/__properties,**/__properties/**" />
+    </copy>
+		<echo message="Ressources copiees" />
+	</target>
+  
+	<!-- CONSTRUCTION DU MANIFEST -->
+	<target name="make-manifest" depends="dist">
+		<manifest generateuuids="${flag.uuids}"
+      distfolder="${folder.build.module}"
+      srcfolder="${folder.module}"
+      resourcetypes="${file.resourcetypes}"
+      explorertypes="${file.explorertypes}"
+      creator="${module.info.creator}"
+      opencmsversion="${module.info.opencmsversion}"
+      project="${module.info.project}"
+      exportversion="${module.info.exportversion}"
+      name="${module.module.name}"
+      nicename="${module.module.nicename}"
+      group="${module.module.group}"
+      moduleclass="${module.module.moduleclass}"
+      moduledescription="${module.module.moduledescription}"
+      version="${module.module.version}"
+      authorname="${module.module.authorname}"
+      authoremail="${module.module.authoremail}"
+      userinstalled="${module.module.userinstalled}"
+      dateinstalled="${module.module.dateinstalled}">
+      <!--Les POINTS D'EXPORTS-->
+      <exportpoint src="/system/modules/${module.module.name}/lib/" dst="WEB-INF/lib/" />
+      <exportpoint src="/system/modules/${module.module.name}/classes/" dst="WEB-INF/classes/" />
+			<exportpoint src="/system/workplace/locales/fr/messages/" dst="WEB-INF/classes/" />
+      <exportpoint src="/system/modules/${module.module.name}/taglib/" dst="WEB-INF/" />
+      <!--Les RESSOURCES DE MODULE-->
+      <resource uri="/system/modules/${module.module.name}/" />
+      <!--Les PARAMETRES-->
+      <parameter name="README_FILEPATH" value="/system/modules/${module.module.name}/readme.txt" />
+			<!--<parameter name="config.containerpage" value="/system/modules/${module.module.name}/config/sitemap.config" />-->
+      <!--Les DEPENDANCES (vis a vis d'autres modules)-->
+      <!--dependency name="com.eurelis.opencms.utils" version="1.0.0.3" />
+			<dependency name="com.alkacon.opencms.v8.formgenerator" version="2.0.1" /-->
+      <!--Un dernier type : le pack de fichiers traites par le module-->
+      <fileset dir="${folder.build.module}" excludes="**/__properties,**/__properties/**" />
+		</manifest>
+	</target>
+
+	<!-- COMPRESSION ZIP -->
+	<target name="module" depends="make-manifest">
+		<echo message="Build number is ${build.major}.${build.minor}.${build.bugfix}.${build.indice} for ${environment}"/>
+		<zip destfile="${modulepath.zip}_${module.module.version}.${modulepath.zip.ext}">
+			<zipfileset dir="${folder.build.module}" excludes="**/__properties/**" />
+		</zip>
+	 </target>
+	
+</project>

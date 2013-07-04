@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+ This file is part of the Eurelis OpenCms Admin Module.
+ 
+ Copyright (c) 2013 Eurelis (http://www.eurelis.com)
+
+ This module is free software: you can redistribute it and/or modify
+ it under the terms of the GNU Lesser General Public License as
+ published by the Free Software Foundation, either version 3 of the
+ License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU Lesser General Public License for more details.
+
+ You should have received a copy of the GNU Lesser General Public 
+ License along with this module. 
+ If not, see http://www.gnu.org/licenses/
+-->
+<devices>
+	<device id="iphone">
+		<label>iPhone</label>
+		<image width="378" height="744">/system/modules/com.eurelis.opencms.ade.tools/resources/iphone.png</image>
+		<screen width="320" height="480" top="133" left="31"/>
+	</device>
+	<device id="iphone5">
+		<label>iPhone 5</label>
+		<image width="384" height="804">/system/modules/com.eurelis.opencms.ade.tools/resources/iphone5.png</image>
+		<screen width="320" height="568" top="119" left="33"/>
+	</device>
+	<device id="ipad">
+		<label>iPad</label>
+		<image width="986" height="1268">/system/modules/com.eurelis.opencms.ade.tools/resources/ipad.png</image>
+		<screen width="768" height="1024" top="122" left="115"/>
+	</device>
+</devices>
