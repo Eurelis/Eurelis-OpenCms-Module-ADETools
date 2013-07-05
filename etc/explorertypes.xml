@@ -30,7 +30,7 @@
         <defaultproperty name="Description"/>
       </defaultproperties>
       <contextmenu>
-      	<entry key="GUI_EXPLORER_CONTEXT_RESPONSIVE_PREVIEW_0" uri="/system/workplace/commons/eurelis/responsivepreview/contextualmenu.jsp" rule="standard"/>
+      	<entry key="GUI_EXPLORER_CONTEXT_RESPONSIVE_PREVIEW_0" uri="/system/workplace/commons/eurelis/responsivepreview/responsivepreview.jsp" rule="standard"/>
 				<separator/>                        
         <entry key="GUI_EXPLORER_CONTEXT_LOCK_0" uri="commons/lock.jsp" rule="lock"/>
         <entry key="GUI_EXPLORER_CONTEXT_OVERRIDELOCK_0" uri="commons/lockchange.jsp" rule="changelock"/>
@@ -72,7 +72,7 @@
         <separator/>
         <entry key="GUI_EXPLORER_CONTEXT_HISTORY_0" uri="views/admin/admin-main.jsp?root=explorer&amp;path=%2Fhistory" rule="nondeleted"/>
         <entry key="GUI_EXPLORER_CONTEXT_PROPERTY_0" uri="/system/modules/org.opencms.ade.properties/pages/properties.jsp" rule="nondeleted"/>
-        <entry key="GUI_EXPLORER_CONTEXT_RESPONSIVE_PREVIEW_0" name="org.opencms.gwt.client.ui.contextmenu.CmsContextMenuDialog" params="dialogUri=/system/workplace/commons/eurelis/responsivepreview/ademenu.jsp?action=iframe|dialogHeight=210|dialogWidth=500" rule="containerpage"/>
+        <entry key="GUI_EXPLORER_CONTEXT_RESPONSIVE_PREVIEW_0" name="org.opencms.gwt.client.ui.contextmenu.CmsContextMenuDialog" params="dialogUri=/system/workplace/commons/eurelis/responsivepreview/responsivepreview.jsp?action=iframe|dialogHeight=210|dialogWidth=500" rule="containerpage"/>
         <entry key="GUI_EXPLORER_CONTEXT_RESOURCE_INFO_0" name="org.opencms.gwt.client.ui.contextmenu.CmsResourceInfo" rule="containerpage"/>
         <entry key="GUI_EXPLORER_CONTEXT_AVAILABILITY_0" name="org.opencms.gwt.client.ui.contextmenu.CmsAvailabilityDialog" rule="containerpage-no-different-site"/>
         <entry key="GUI_EXPLORER_CONTEXT_LOCK_REPORT_0" name="org.opencms.gwt.client.ui.contextmenu.CmsLockReport" rule="containerpage"/>

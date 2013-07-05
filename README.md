@@ -34,6 +34,18 @@ This tool can be accessed by right-clicking on a containerpage in the **Explorer
 ![usage-contextual-03]
 
 
+### Configuration of available devices
+You can configure the list of devices by editing the /system/modules/com.eurelis.opencms.ade.tools/resources/devices.xml file
+
+1. device tag "id" attribute must contains only letters, no spaces or other caracters
+
+2. label tag corresponds to the device name
+
+3. image tag is used to define an image on the vfs representing the device you want to add, don't forget to fill width and height attributes (in pixels)
+
+4. screen tag allow to define the size and position of the iframe where the page will be rendered. width and height attributes corresponds to the size of your device "screen" in points, not pixels. (ie: an iphone 4 has a retina screen of 640px*960px but of 320pt * 480pt). top and left attributes are used to define the position of the "screen" relatively to the background image.
+
+
 [eurelis]: http://www.eurelis.com "Agitateur de Technologies"
 [opencms]: http://www.opencms.org/ "OpenCms"
 
