@@ -72,7 +72,7 @@
     		<link href="<cms:link>/system/workplace/commons/style/workplace.css</cms:link>" type="text/css" rel="stylesheet"/>
     	</c:otherwise>
     </c:choose>
-    <script src="<cms:link>/system/modules/com.eurelis.opencms.admin/resources/jquery.min.js</cms:link>"></script>
+    <script src="<cms:link>/system/modules/com.eurelis.opencms.ade.tools/resources/javascript/libs/jquery-2.0.0.min.js</cms:link>"></script>
     <script>
     	
     	<% if (iframeMode) { %>
@@ -93,13 +93,13 @@
                   'width' : ${device.imageWidth},
                   'height': ${device.imageHeight},
                   'next-class' : 'landscape',
-                  'img': '<cms:link>/system/modules/com.eurelis.opencms.admin/resources/rotate-ccw.png</cms:link>',
+                  'img': '<cms:link>/system/modules/com.eurelis.opencms.ade.tools/resources/rotate-ccw.png</cms:link>',
                 },
                 'landscape' : {
                   'width' : ${device.imageHeight},
                   'height': ${device.imageWidth},
                   'next-class' : 'portrait',
-                  'img': '<cms:link>/system/modules/com.eurelis.opencms.admin/resources/rotate-cw.png</cms:link>',
+                  'img': '<cms:link>/system/modules/com.eurelis.opencms.ade.tools/resources/rotate-cw.png</cms:link>',
                 }};
       </c:forEach>
       
